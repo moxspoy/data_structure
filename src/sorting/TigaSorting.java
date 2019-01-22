@@ -101,13 +101,22 @@ public class TigaSorting {
     }
 
     private static void linearSearch (int[] data, int searchNumber) {
+        boolean isFound = false;
+        int indexFounded = 0;
+    
         for(int i = 0; i < data.length; i++) {
             if(searchNumber == data[i]) {
-                System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + i);
+                isFound = true;
+                indexFounded = i;
                 break;
-            } else {
-                System.out.println("Data " + searchNumber + " tidak ditemukan");
             }
+            
+        }
+        if(isFound) {
+            System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + indexFounded);
+            
+        } else {
+            System.out.println("Data " + searchNumber + " tidak ditemukan");
         }
     }
 
