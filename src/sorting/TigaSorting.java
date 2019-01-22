@@ -17,7 +17,7 @@ public class TigaSorting {
         boolean flag = true;
 
         do {
-            System.out.println("Pilih Operasi Pengurutan\n1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n" +
+            System.out.println("Pilih Algoritma yang tersedia\n1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n" +
                     "4. Quick Sort\n5. Shell Sort\n6. Merge Sort\n7. Pencarian\n8. Hash Tabel\n0. Exit");
 
             int input = s.nextInt();
@@ -60,7 +60,6 @@ public class TigaSorting {
                     searching(data, searchNumber);
                     break;
                 case 8:
-                    
                     hashTable();
                     break;
                 default:
@@ -112,8 +111,7 @@ public class TigaSorting {
         }
     }
 
-    private static int binarySearch(int arr[], int l, int r, int x) 
-    { 
+    private static int binarySearch(int arr[], int l, int r, int x) { 
         if (r >= l) { 
             int mid = l + (r - l) / 2; 
   
@@ -232,7 +230,6 @@ public class TigaSorting {
                             arr[j] = temp;
                             print(arr);
                         }
-//                        print(arr);
                     }
                 }
 
@@ -508,7 +505,7 @@ public class TigaSorting {
         if (isRepeat) {
             data = addData();
             option = askOrderedData();
-            insertionSort(data, option);
+            shellSort(data, option);
         } else {
             menu();
         }
@@ -516,11 +513,11 @@ public class TigaSorting {
     }
 
     private static void mergeSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Insertion Sort..");
+        System.out.println("\nMemulai proses Merge Sort..");
         System.out.println("Data sebelum di urutkan: ");
         print(data);
 
-        /* Main insertion sort operation */
+        /* Main Merge sort operation */
         int[] arr = data;
         int n = arr.length;
       
@@ -529,14 +526,14 @@ public class TigaSorting {
         switch (option) {
             case 1:
                 //ascending
-
+                msort(arr, true, 0, arr.length-1); 
 
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
                 break;
             case 2:
                 //descending
-
+                msort(arr, false, 0, arr.length-1);
 
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
@@ -550,12 +547,114 @@ public class TigaSorting {
         if (isRepeat) {
             data = addData();
             option = askOrderedData();
-            insertionSort(data, option);
+            mergeSort(data, option);
         } else {
             menu();
         }
 
     }
+
+    // Merges two subarrays of arr[]. 
+    // First subarray is arr[l..m] 
+    // Second subarray is arr[m+1..r] 
+    private static void merge(int arr[], boolean isAsc, int l, int m, int r) 
+    { 
+        // Find sizes of two subarrays to be merged 
+        int n1 = m - l + 1; 
+        int n2 = r - m; 
+        System.out.println("n1: " + n1 + ", n2: " + n2);
+  
+        /* Create temp arrays */
+        int L[] = new int [n1]; 
+        int R[] = new int [n2]; 
+  
+        /*Copy data to temp arrays*/
+        for (int i=0; i<n1; ++i) 
+            L[i] = arr[l + i]; 
+        for (int j=0; j<n2; ++j) 
+            R[j] = arr[m + 1+ j]; 
+  
+        System.out.print("L array: ");
+        print(L);
+        System.out.print("R array: ");
+        print(R);
+        
+  
+        /* Merge the temp arrays */
+  
+        // Initial indexes of first and second subarrays 
+        int i = 0, j = 0; 
+  
+        // Initial index of merged subarry array 
+        int k = l; 
+        while (i < n1 && j < n2) 
+        { 
+            if(isAsc) {
+                if (L[i] <= R[j]) 
+                { 
+                    arr[k] = L[i]; 
+                    i++; 
+                } 
+                else
+                { 
+                    arr[k] = R[j]; 
+                    j++; 
+                } 
+            } else {
+                if (L[i] > R[j]) 
+                { 
+                    arr[k] = L[i]; 
+                    i++; 
+                } 
+                else
+                { 
+                    arr[k] = R[j]; 
+                    j++; 
+                } 
+            }
+            k++; 
+        } 
+        
+  
+        /* Copy remaining elements of L[] if any */
+        while (i < n1) 
+        { 
+            arr[k] = L[i]; 
+            i++; 
+            k++; 
+        } 
+  
+        /* Copy remaining elements of R[] if any */
+        while (j < n2) 
+        { 
+            arr[k] = R[j]; 
+            j++; 
+            k++; 
+        } 
+        System.out.print("Hasil merge: ");
+        print(arr);
+        System.out.println("===================");
+    } 
+  
+    // Main function that sorts arr[l..r] using 
+    // merge() 
+    private static void msort(int arr[], boolean isAsc, int l, int r) 
+    { 
+        if (l < r) 
+        { 
+            // Find the middle point 
+            int m = (l+r)/2; 
+  
+            // Sort first and second halves 
+            msort(arr, isAsc, l, m);
+            
+            msort(arr, isAsc, m+1, r); 
+            
+            // Merge the sorted halves 
+            merge(arr, isAsc, l, m, r);
+         
+        } 
+    } 
 
     private static void quickSort(int[] data, int option) {
         System.out.println("\nMemulai proses Quick Sort..");
@@ -592,7 +691,7 @@ public class TigaSorting {
         if (isRepeat) {
             data = addData();
             option = askOrderedData();
-            insertionSort(data, option);
+            quickSort(data, option);
         } else {
             menu();
         }
