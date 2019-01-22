@@ -1,6 +1,9 @@
 package sorting;
-
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class TigaSorting {
 
@@ -15,7 +18,7 @@ public class TigaSorting {
 
         do {
             System.out.println("Pilih Operasi Pengurutan\n1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n" +
-                    "4. Quick Sort\n5. Shell Sort\n6. Merge Sort\n0. Exit");
+                    "4. Quick Sort\n5. Shell Sort\n6. Merge Sort\n7. Pencarian\n8. Hash Tabel\n0. Exit");
 
             int input = s.nextInt();
             int option;
@@ -51,6 +54,15 @@ public class TigaSorting {
                     option = askOrderedData();
                     mergeSort(data, option);
                     break;
+                case 7:
+                    data = addData();
+                    int searchNumber = askUserTheNumber();
+                    searching(data, searchNumber);
+                    break;
+                case 8:
+                    
+                    hashTable();
+                    break;
                 default:
                     flag = false;
                     System.out.println("Program Berakhir. Terimakasih telah menggunakan program ini");
@@ -58,6 +70,141 @@ public class TigaSorting {
                     break;
             }
         } while (flag);
+    }
+
+    private static int askUserTheNumber() {
+        System.out.println("Angka berapa yang akan dicari? ");
+        int searchNumber = s.nextInt();
+        return searchNumber;
+    }
+
+    private static void searching(int[] data, int searchNumber) {
+        System.out.println("Pilihan metode pencarian\n1. Linear Search\n2. Binary Search\n3. Kembali ke menu utama");
+        int optionInSearching = s.nextInt();
+        switch(optionInSearching) {
+            case 1:
+                linearSearch(data, searchNumber);
+                searching(data, searchNumber);
+                break;
+            case 2:
+                int result = binarySearch(data, 0, data.length-1, searchNumber);
+                if(result != -1) {
+                    System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + result);
+                } else {
+                    System.out.println("Data " + searchNumber + " tidak ditemukan");
+                }
+                searching(data, searchNumber);
+                break;
+            default:
+                menu();
+                break;
+        }
+    }
+
+    private static void linearSearch (int[] data, int searchNumber) {
+        for(int i = 0; i < data.length; i++) {
+            if(searchNumber == data[i]) {
+                System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + i);
+                break;
+            } else {
+                System.out.println("Data " + searchNumber + " tidak ditemukan");
+            }
+        }
+    }
+
+    private static int binarySearch(int arr[], int l, int r, int x) 
+    { 
+        if (r >= l) { 
+            int mid = l + (r - l) / 2; 
+  
+            // If the element is present at the 
+            // middle itself 
+            if (arr[mid] == x) 
+                return mid; 
+  
+            // If element is smaller than mid, then 
+            // it can only be present in left subarray 
+            if (arr[mid] > x) 
+                return binarySearch(arr, l, mid - 1, x); 
+  
+            // Else the element can only be present 
+            // in right subarray 
+            return binarySearch(arr, mid + 1, r, x); 
+        } 
+  
+        // We reach here when element is not present 
+        // in array 
+        return -1; 
+    } 
+  
+
+
+    private static void hashTable() {
+        System.out.println("Berapa jumlah data yang akan dimasukkan dalam hash table?");
+        int n = s.nextInt();
+        Hashtable<Integer, Integer> hashtable = new Hashtable<>();
+        for(int i = 0; i<n; i++) {
+            System.out.println("Masukkan data ke: " + (i+1));
+            int NIP = s.nextInt();
+            int alamat = NIP % n;
+            if(hashtable.containsKey(alamat)) {
+                System.out.println("Terjadi pengalamatan terbuka. Alamat " + alamat + " sudah terisi");
+                alamat = hashtable.size();
+                
+            }
+            hashtable.put(alamat, NIP);
+            System.out.println("Data " + NIP + " sukses dimasukkan ke hashtable dengan alamat " + alamat);
+            
+        }
+        menuHashtable(hashtable);
+        boolean isRepeat = askRepeat();
+        if (isRepeat) {
+            hashTable();
+        } else {
+            menu();
+        }
+
+    }
+
+    private static void menuHashtable(Hashtable<Integer, Integer> hashtable) {
+        System.out.println("Petunjuk:\n1. Tampilkan semua data\n2. Cari data\n3. Hapus data\n4. Kembali ke menu");
+        int optionInHash = s.nextInt();
+        switch(optionInHash) {
+            case 1:
+                
+                for (int key : hashtable.keySet()) {
+                    System.out.println("Alamat: " + key + ", NIP: " + hashtable.get(key));
+                }
+                menuHashtable(hashtable);
+                break;
+            case 2:
+                System.out.println("Masukkan NIP yang akan dicari: ");
+                int NIP = s.nextInt();
+                if(hashtable.containsValue(NIP)) {
+                    System.out.println("Data " + NIP + " ditemukan" );
+                } else {
+                    System.out.println("Data tidak ditemukan");
+                }
+                menuHashtable(hashtable);
+                break;
+            case 3:
+                System.out.println("Masukkan alamat data yang akan dihapus: ");
+                int key = s.nextInt();
+                if(hashtable.containsKey(key)) {
+                    hashtable.remove(key);
+                    System.out.println("data dengan kunci: " + key + " sukses dihapus");
+                } else {
+                    System.out.println("Gagal menghapus data karena data tidak ditemukan");
+                }
+                menuHashtable(hashtable);
+                
+                break;
+            
+            default:
+                menu();
+                break;
+        }
+
     }
 
     private static void bubbleSort(int[] data, int option) {
@@ -134,7 +281,7 @@ public class TigaSorting {
         /* Main bubble sort operation */
         int[] arr = data;
         int n = arr.length;
-        int temp;
+    
         boolean isRepeat;
 
         switch (option) {
@@ -222,7 +369,7 @@ public class TigaSorting {
 
         /* Main insertion sort operation */
         int n = data.length;
-        int temp;
+        
         boolean isRepeat;
 
         switch (option) {
@@ -250,7 +397,26 @@ public class TigaSorting {
                 break;
             case 2:
                 //descending
-
+                for (int j = 1; j < data.length; j++) {
+                    // Get the key (The value that needs to be compared with existing
+                    // values.
+                    int key = data[j];
+                    System.out.println("kunci: " + key);
+                    // Get the array index for comparison, we need to compare with all
+                    // other elements in the array with
+                    // key
+                    int i = j - 1;
+                    // While i > 0 and when key is less than the value in the array
+                    // shift the value and insert
+                    // the value appropriately.
+                    //System.out.println(j);
+                    while (i >= 0 && data[i] < key) {
+                        data[i + 1] = data[i];
+                        i = i - 1;
+                        data[i + 1] = key;
+                    }
+                    print(data);
+                }
 
                 System.out.println("Data setelah diurutkan:");
                 print(data);
@@ -272,20 +438,56 @@ public class TigaSorting {
     }
 
     private static void shellSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Insertion Sort..");
+        System.out.println("\nMemulai proses Shell Sort..");
         System.out.println("Data sebelum di urutkan: ");
         print(data);
 
         /* Main insertion sort operation */
         int[] arr = data;
         int n = arr.length;
-        int temp;
+    
         boolean isRepeat;
 
         switch (option) {
             case 1:
                 //ascending
+                // Start with a big gap, then reduce the gap 
+                //for (int gap = n/2; gap > 0; gap /= 2)
+                int gap = 1;
+                while(gap <= n/3){
+                    gap = 3*gap + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
+                } 
 
+                while (gap > 0)
+                { 
+                    System.out.println("Gap yang dipilih: " + gap);
+                    // Do a gapped insertion sort for this gap size. 
+                    // The first gap elements a[0..gap-1] are already 
+                    // in gapped order keep adding one more element 
+                    // until the entire array is gap sorted 
+                    for (int i = gap; i < n; i++) { 
+                        
+                                       
+                        // add a[i] to the elements that have been gap 
+                        // sorted save a[i] in temp and make a hole at 
+                        // position i 
+                        int temp = arr[i]; 
+        
+                        // shift earlier gap-sorted elements up until 
+                        // the correct location for a[i] is found 
+                        int j; 
+                        for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+                            
+                            arr[j] = arr[j - gap];
+                        }
+        
+                        // put temp (the original a[i]) in its correct 
+                        // location 
+                        arr[j] = temp; 
+                        print(arr);
+                    } 
+                    gap = (gap - 1)/3; 
+                }
 
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
@@ -321,7 +523,7 @@ public class TigaSorting {
         /* Main insertion sort operation */
         int[] arr = data;
         int n = arr.length;
-        int temp;
+      
         boolean isRepeat;
 
         switch (option) {
@@ -356,20 +558,20 @@ public class TigaSorting {
     }
 
     private static void quickSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Insertion Sort..");
+        System.out.println("\nMemulai proses Quick Sort..");
         System.out.println("Data sebelum di urutkan: ");
         print(data);
 
-        /* Main insertion sort operation */
+        /* Main quick sort operation */
         int[] arr = data;
         int n = arr.length;
-        int temp;
+        
         boolean isRepeat;
 
         switch (option) {
             case 1:
                 //ascending
-
+                qsort(arr, 0, n-1);
 
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
@@ -396,6 +598,52 @@ public class TigaSorting {
         }
 
     }
+
+    private static void qsort(int arr[], int low, int high) 
+    { 
+        if (low < high) 
+        { 
+            /* pi is partitioning index, arr[pi] is  
+              now at right place */
+            int pi = partition(arr, low, high); 
+  
+            // Recursively sort elements before 
+            // partition and after partition 
+            qsort(arr, low, pi-1); 
+            qsort(arr, pi+1, high); 
+        } 
+    } 
+
+    private static int partition(int arr[], int low, int high) 
+    { 
+        int pivot = arr[high];  
+        System.out.println("pivot is: " + pivot);
+        int i = (low-1); // index of smaller element 
+        for (int j=low; j<high; j++) 
+        { 
+            // If current element is smaller than or 
+            // equal to pivot 
+            if (arr[j] <= pivot) 
+            { 
+                i++; 
+  
+                // swap arr[i] and arr[j] 
+                //System.out.println("swap " + arr[j] + " with " + arr[i]);
+                int temp = arr[i]; 
+                arr[i] = arr[j]; 
+                arr[j] = temp; 
+            
+            } 
+        } 
+  
+        // swap arr[i+1] and arr[high] (or pivot) 
+        int temp = arr[i+1]; 
+        arr[i+1] = arr[high]; 
+        arr[high] = temp; 
+        print(arr);
+  
+        return i+1; 
+    } 
 
 
     private static boolean askRepeat() {
@@ -424,7 +672,7 @@ public class TigaSorting {
     }
 
     private static int[] addData() {
-        System.out.println("Berapa jumlah data yang akan di urutkan?");
+        System.out.println("Berapa jumlah datanya?");
         int numOfElement = s.nextInt();
         int[] arrData = new int[numOfElement];
         for (int i=0; i<numOfElement; i++) {
