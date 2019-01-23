@@ -1,11 +1,11 @@
-package sorting;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class TigaSorting {
+public class Main {
 
     private static final Scanner s = new Scanner(System.in);
 
@@ -64,7 +64,7 @@ public class TigaSorting {
                     break;
                 default:
                     flag = false;
-                    System.out.println("Program Berakhir. Terimakasih telah menggunakan program ini");
+                    System.out.println("Program Berakhir. Program ini dibuat oleh\nM Nurilman Baehaqi dan Dwiki\nTerimakasih telah menggunakan program ini");
                     System.exit(0);
                     break;
             }
@@ -660,7 +660,7 @@ public class TigaSorting {
             case 2:
                 int result = binarySearch(data, 0, data.length-1, searchNumber);
                 if(result != -1) {
-                    System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + result);
+                    System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + (result+1));
                 } else {
                     System.out.println("Data " + searchNumber + " tidak ditemukan");
                 }
@@ -677,6 +677,7 @@ public class TigaSorting {
         int indexFounded = 0;
     
         for(int i = 0; i < data.length; i++) {
+            System.out.println("Membandingkan " + data[i] + " dengan " + searchNumber);
             if(searchNumber == data[i]) {
                 isFound = true;
                 indexFounded = i;
@@ -685,7 +686,7 @@ public class TigaSorting {
             
         }
         if(isFound) {
-            System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + indexFounded);
+            System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + (indexFounded+1));
             
         } else {
             System.out.println("Data " + searchNumber + " tidak ditemukan");
@@ -695,7 +696,6 @@ public class TigaSorting {
     private static int binarySearch(int arr[], int l, int r, int x) { 
         if (r >= l) { 
             int mid = l + (r - l) / 2; 
-  
             // If the element is present at the 
             // middle itself 
             if (arr[mid] == x) 
@@ -703,12 +703,15 @@ public class TigaSorting {
   
             // If element is smaller than mid, then 
             // it can only be present in left subarray 
-            if (arr[mid] > x) 
-                return binarySearch(arr, l, mid - 1, x); 
-  
-            // Else the element can only be present 
-            // in right subarray 
-            return binarySearch(arr, mid + 1, r, x); 
+            if (arr[mid] > x) {
+                System.out.println("Pencarian dilakukan ke kiri");
+                return binarySearch(arr, l, mid - 1, x);
+            } else {
+                // Else the element can only be present 
+                // in right subarray 
+                System.out.println("Pencarian dilakukan ke kanan");
+                return binarySearch(arr, mid + 1, r, x); 
+            }
         } 
   
         // We reach here when element is not present 
