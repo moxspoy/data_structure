@@ -1,3 +1,4 @@
+package tugas_multiple;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -345,56 +346,57 @@ public class Main {
     }
 
     private static void startShellSort(int[]arr, boolean isAsc) {
-        int n = arr.length;
+        int n = arr.length; //13 == 4
+        int limit = n/5;
         // Start with a big gap, then reduce the gap 
-                //for (int gap = n/2; gap > 0; gap /= 2)
-                int gap = 1;
-                while(gap <= n/3){
-                    gap = 3*gap + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
-                } 
+        //for (int gap = n/2; gap > 0; gap /= 2
+        int gap = 1;
+        while(gap <= limit){
+            gap = 3*gap + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
+        }
 
-                while (gap > 0)
-                { 
-                    System.out.println("Gap yang dipilih: " + gap);
-                    // Do a gapped insertion sort for this gap size. 
-                    // The first gap elements a[0..gap-1] are already 
-                    // in gapped order keep adding one more element 
-                    // until the entire array is gap sorted 
-                    for (int i = gap; i < n; i++) { 
-                        
-                                       
-                        // add a[i] to the elements that have been gap 
-                        // sorted save a[i] in temp and make a hole at 
-                        // position i 
-                        int temp = arr[i]; 
-        
-                        // shift earlier gap-sorted elements up until 
-                        // the correct location for a[i] is found >=
-                        int j; 
-                        
-                        if(isAsc) {
-                            //asc
-                            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-                                //System.out.println("\ni: " + i + ", j: " + j + ", arr[j - gap]: " + arr[j - gap] + ", temp: " + temp + ", arr[j]: " + arr[j]);
-                                System.out.println("Terjadi penukaran " +  arr[j - gap] + " dengan " + arr[j]);
-                                arr[j] = arr[j - gap];
-                            }
-                        } else {
-                            //desc
-                            for (j = i; j >= gap && arr[j - gap] <= temp; j -= gap) {
-                                //System.out.println("\ni: " + i + ", j: " + j + ", arr[j - gap]: " + arr[j - gap] + ", temp: " + temp + ", arr[j]: " + arr[j]);
-                                System.out.println("Terjadi penukaran " +  arr[j - gap] + " dengan " + arr[j]);
-                                arr[j] = arr[j - gap];
-                            }
-                        }
-        
-                        // put temp (the original a[i]) in its correct 
-                        // location 
-                        arr[j] = temp; 
-                        print(arr);
-                    } 
-                    gap = (gap - 1)/3; 
+        while (gap > 0)
+        {
+            System.out.println("\nGap yang dipilih: " + gap);
+            // Do a gapped insertion sort for this gap size.
+            // The first gap elements a[0..gap-1] are already
+            // in gapped order keep adding one more element
+            // until the entire array is gap sorted
+            for (int i = gap; i < n; i++) {
+
+
+                // add a[i] to the elements that have been gap
+                // sorted save a[i] in temp and make a hole at
+                // position i
+                int temp = arr[i];
+
+                // shift earlier gap-sorted elements up until
+                // the correct location for a[i] is found >=
+                int j;
+
+                if(isAsc) {
+                    //asc
+                    for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+                        //System.out.println("\ni: " + i + ", j: " + j + ", arr[j - gap]: " + arr[j - gap] + ", temp: " + temp + ", arr[j]: " + arr[j]);
+                        System.out.println("Terjadi penukaran " +  arr[j - gap] + " dengan " + arr[j]);
+                        arr[j] = arr[j - gap];
+                    }
+                } else {
+                    //desc
+                    for (j = i; j >= gap && arr[j - gap] <= temp; j -= gap) {
+                        //System.out.println("\ni: " + i + ", j: " + j + ", arr[j - gap]: " + arr[j - gap] + ", temp: " + temp + ", arr[j]: " + arr[j]);
+                        System.out.println("Terjadi penukaran " +  arr[j - gap] + " dengan " + arr[j]);
+                        arr[j] = arr[j - gap];
+                    }
                 }
+
+                // put temp (the original a[i]) in its correct
+                // location
+                arr[j] = temp;
+                print(arr);
+            }
+            gap = (gap - 1)/3;
+        }
     }
 
     private static void mergeSort(int[] data, int option) {

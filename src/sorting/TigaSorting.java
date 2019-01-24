@@ -1,3 +1,4 @@
+package sorting;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -5,7 +6,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class Main {
+public class TigaSorting {
 
     private static final Scanner s = new Scanner(System.in);
 
