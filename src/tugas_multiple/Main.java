@@ -1,5 +1,8 @@
 package tugas_multiple;
 
+import com.sun.deploy.util.ArrayUtil;
+
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Hashtable;
 
@@ -16,7 +19,7 @@ public class Main {
 
         do {
             System.out.println("Pilih Algoritma yang tersedia\n1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n" +
-                    "4. Quick Sort\n5. Shell Sort\n6. Merge Sort\n7. Pencarian\n8. Hash Tabel\n0. Exit");
+                    "4. Quick Sort\n5. Shell Sort\n6. Merge Sort\n7. Inplace Sort\n8. Pencarian\n9. Hash Tabel\n0. Exit");
 
             int input = s.nextInt();
             int option;
@@ -54,10 +57,15 @@ public class Main {
                     break;
                 case 7:
                     data = addData();
+                    option = askOrderedData();
+                    inplaceSort(data, option);
+                    break;
+                case 8:
+                    data = addData();
                     int searchNumber = askUserTheNumber();
                     searching(data, searchNumber);
                     break;
-                case 8:
+                case 9:
                     hashTable();
                     break;
                 default:
@@ -640,7 +648,89 @@ public class Main {
         print(arr);
   
         return i+1; 
-    } 
+    }
+
+    private static void inplaceSort(int[] data, int option) {
+        System.out.println("\nMemulai proses In Place Sort..");
+        System.out.println("Data sebelum di urutkan: ");
+        print(data);
+
+        /* Main In Place sort operation */
+        int[] arr = data;
+        int n = arr.length;
+
+        boolean isRepeat;
+
+        switch (option) {
+            case 1:
+                //ascending
+                sortWithInPlace(arr, true);
+
+                System.out.println("Data setelah diurutkan:");
+                print(arr);
+                break;
+            case 2:
+                //descending
+                sortWithInPlace(arr, false);
+
+                System.out.println("Data setelah diurutkan:");
+                print(arr);
+                break;
+            default:
+                System.out.println("Pilih 1 atau 2 saja!");
+
+        }
+
+        isRepeat = askRepeat();
+        if (isRepeat) {
+            data = addData();
+            option = askOrderedData();
+            inplaceSort(data, option);
+        } else {
+            menu();
+        }
+    }
+
+    private static void sortWithInPlace(int[] data, boolean isAsc) {
+        int n = data.length;
+        for (int i = n-1; i >= 0; i--){
+            // Find the maximum element in unsorted array
+            int max_idx = i;
+            for (int j = 0; j < i; j++) {
+                if (data[j] > data[max_idx]) {
+                    max_idx = j;
+                }
+            }
+            System.out.println("\nNilai maksimum: " + data[max_idx]);
+
+            if (data[i] < data[max_idx]) {
+                System.out.println("swap " + data[max_idx] + " dengan " + data[i]);
+
+                // Swap the found max element with the first
+                // element
+                int new_temp = data[max_idx];
+                data[max_idx] = data[i];
+                data[i] = new_temp;
+            } else {
+                System.out.println("tidak terjadi swap");
+            }
+
+            print(data);
+        }
+        if(!isAsc) {
+            //asc
+            data = reverseArray(data);
+        }
+    }
+
+    private static int[] reverseArray(int[] data) {
+        for (int i = 0; i < data.length/2 ; i++) {
+            int temp = data[i];
+            data[i] = data[data.length - i - 1];
+            data[data.length - i - 1] = temp;
+        }
+        return data;
+    }
 
     private static int askUserTheNumber() {
         System.out.println("Angka berapa yang akan dicari? ");
@@ -727,9 +817,14 @@ public class Main {
             System.out.println("Masukkan data ke: " + (i+1));
             int NIP = s.nextInt();
             int alamat = NIP % n;
-            if(hashtable.containsKey(alamat)) {
+            while(hashtable.containsKey(alamat)) {
                 System.out.println("Terjadi pengalamatan terbuka. Alamat " + alamat + " sudah terisi");
-                alamat = hashtable.size();
+
+                if(alamat == n-1) {
+                    alamat = 0;
+                } else {
+                    alamat++;
+                }
                 
             }
             hashtable.put(alamat, NIP);
