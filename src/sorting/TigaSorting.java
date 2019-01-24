@@ -235,7 +235,8 @@ public class TigaSorting {
                     /* Move elements of arr[0..i-1], that are
                     greater than key, to one position ahead
                     of their current position */
-                    System.out.println("kunci: " + key);
+                    System.out.println("kunci: " + key
+                    );
                     while (j>=0 && data[j] > key)
                     {
                         data[j+1] = data[j];

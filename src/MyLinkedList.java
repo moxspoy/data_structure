@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * Created by MNurilmanBaehaqi on 10/16/2018.
