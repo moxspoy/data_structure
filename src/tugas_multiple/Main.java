@@ -1,10 +1,7 @@
 package tugas_multiple;
 
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Map;
 
 public class Main {
 
@@ -716,8 +713,7 @@ public class Main {
             }
         } 
   
-        // We reach here when element is not present 
-        // in array 
+        // element not found
         return -1; 
     } 
   
