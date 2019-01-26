@@ -973,5 +973,11 @@ public class Main {
         System.out.println(Arrays.toString(data));
         System.out.println();
     }
+
+    /* TODO List
+    1. Langkah quick sort ada yg blm di tampilkan
+    2. Shell sort yg masalah sub array
+    3. Di hashtable, data dulu diinput nanti baru muncul pilihan pengalamatan
+     */
 }
  
