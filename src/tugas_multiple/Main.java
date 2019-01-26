@@ -16,7 +16,7 @@ public class Main {
         boolean flag = true;
 
         do {
-            System.out.println("Pilih Algoritma yang tersedia\n1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n" +
+            System.out.println("\n\nPilih Algoritma yang tersedia\n1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n" +
                     "4. Quick Sort\n5. Shell Sort\n6. Merge Sort\n7. Inplace Sort\n8. Pencarian\n9. Hash Tabel\n0. Exit");
 
             int input = s.nextInt();
@@ -688,7 +688,7 @@ public class Main {
     }
 
     private static void searching(int[] data, int searchNumber) {
-        System.out.println("Pilihan metode pencarian\n1. Linear Search\n2. Binary Search\n3. Kembali ke menu utama");
+        System.out.println("Pilihan metode pencarian\n1. Linear Search\n2. Binary Search\n3. Input Data Baru\n4. Kembali ke menu utama");
         int optionInSearching = s.nextInt();
         switch(optionInSearching) {
             case 1:
@@ -703,6 +703,11 @@ public class Main {
                     System.out.println("Data " + searchNumber + " tidak ditemukan");
                 }
                 searching(data, searchNumber);
+                break;
+            case 3:
+                data = addData();
+                int findNumber = askUserTheNumber();
+                searching(data, findNumber);
                 break;
             default:
                 menu();

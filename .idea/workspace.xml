@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b392e4e-bad5-4e8f-b6da-6eab89a6f82a" name="Default" comment="ready to present after test">
+    <list default="true" id="4b392e4e-bad5-4e8f-b6da-6eab89a6f82a" name="Default" comment="removing unecessary comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tugas_multiple/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tugas_multiple/Main.java" afterDir="false" />
     </list>
@@ -25,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tugas_multiple/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="924" column="13" selection-start-line="924" selection-start-column="13" selection-end-line="924" selection-end-column="13" />
+            <state relative-caret-position="113">
+              <caret line="713" column="22" lean-forward="true" selection-start-line="713" selection-start-column="22" selection-end-line="713" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,6 +66,7 @@
       <find>Dwiki</find>
       <find>Coll</find>
       <find>gap</find>
+      <find>cari</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -345,10 +346,10 @@
     </configuration>
     <list>
       <item itemvalue="Application.AntrianKota" />
-      <item itemvalue="Application.FindGap" />
-      <item itemvalue="Application.Main (1)" />
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.TigaSorting" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.FindGap" />
     </list>
     <recent_temporary>
       <list>
@@ -427,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548466539177</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="removing unecessary comments">
+      <created>1548472147785</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1548472147785</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -441,16 +449,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31240544" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31240544" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49092284" weight="0.4811784" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49092284" visible="true" weight="0.4811784" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -512,7 +519,8 @@
     <MESSAGE value="minor changes" />
     <MESSAGE value="fix pengalamatan terbuka" />
     <MESSAGE value="ready to present after test" />
-    <option name="LAST_COMMIT_MESSAGE" value="ready to present after test" />
+    <MESSAGE value="removing unecessary comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="removing unecessary comments" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -623,8 +631,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tugas_multiple/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="924" column="13" selection-start-line="924" selection-start-column="13" selection-end-line="924" selection-end-column="13" />
+        <state relative-caret-position="113">
+          <caret line="713" column="22" lean-forward="true" selection-start-line="713" selection-start-column="22" selection-end-line="713" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
