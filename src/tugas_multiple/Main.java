@@ -75,13 +75,20 @@ public class Main {
         } while (flag);
     }
 
-
-
+    private static void firstPrint(int[] data, int option) {
+        switch (option) {
+            case 1:
+            case 2:
+                System.out.println("\nMemulai proses sorting..");
+                System.out.println("Data sebelum di urutkan: ");
+                print(data);
+                break;
+            default:
+                break;
+        }
+    }
     private static void bubbleSort(int[] data, int option) {
-
-        System.out.println("\nMemulai proses Bubble Sort..");
-        System.out.println("Data sebelum di urutkan: ");
-        print(data);
+        firstPrint(data, option);
 
         /* Main bubble sort operation */
         int[] arr = data;
@@ -126,10 +133,19 @@ public class Main {
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
                 break;
+            case 3:
+                data = addData();
+                option = askOrderedData();
+                bubbleSort(data, option);
+                break;
             default:
-                System.out.println("Pilih 1 atau 2 saja!");
+                menu();
+                break;
 
         }
+
+        int optionOrder = askOrderedData();
+        bubbleSort(data, optionOrder);
 
         isRepeat = askRepeat();
         if (isRepeat) {
@@ -143,9 +159,7 @@ public class Main {
     }
 
     private static void selectionSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Selection Sort..");
-        System.out.println("Data sebelum di urutkan: ");
-        print(data);
+        firstPrint(data, option);
 
         /* Main Selection sort operation */
         int[] arr = data;
@@ -214,10 +228,19 @@ public class Main {
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
                 break;
+            case 3:
+                data = addData();
+                option = askOrderedData();
+                selectionSort(data, option);
+                break;
             default:
-                System.out.println("Pilih 1 atau 2 saja!");
+                menu();
+                break;
 
         }
+
+        int optionOrder = askOrderedData();
+        selectionSort(data, optionOrder);
 
         isRepeat = askRepeat();
         if (isRepeat) {
@@ -231,9 +254,7 @@ public class Main {
     }
 
     private static void insertionSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Insertion Sort..");
-        System.out.println("Data sebelum di urutkan: ");
-        print(data);
+        firstPrint(data, option);
 
         /* Main insertion sort operation */
         int n = data.length;
@@ -280,10 +301,18 @@ public class Main {
                 System.out.println("Data setelah diurutkan:");
                 print(data);
                 break;
+            case 3:
+                data = addData();
+                option = askOrderedData();
+                insertionSort(data, option);
+                break;
             default:
-                System.out.println("Pilih 1 atau 2 saja!");
+                menu();
+                break;
 
         }
+        int optionOrder = askOrderedData();
+        insertionSort(data, optionOrder);
 
         isRepeat = askRepeat();
         if (isRepeat) {
@@ -297,10 +326,7 @@ public class Main {
     }
 
     private static void shellSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Shell Sort..");
-        System.out.println("Data sebelum di urutkan: ");
-        print(data);
-
+        firstPrint(data, option);
         /* Main shell sort operation */
         int[] arr = data;
         int n = arr.length;
@@ -322,10 +348,18 @@ public class Main {
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
                 break;
+            case 3:
+                data = addData();
+                option = askOrderedData();
+                shellSort(data, option);
+                break;
             default:
-                System.out.println("Pilih 1 atau 2 saja!");
+                menu();
+                break;
 
         }
+        int optionOrder = askOrderedData();
+        shellSort(data, optionOrder);
 
         isRepeat = askRepeat();
         if (isRepeat) {
@@ -376,9 +410,7 @@ public class Main {
     }
 
     private static void mergeSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Merge Sort..");
-        System.out.println("Data sebelum di urutkan: ");
-        print(data);
+        firstPrint(data, option);
 
         /* Main Merge sort operation */
         int[] arr = data;
@@ -401,19 +433,18 @@ public class Main {
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
                 break;
+            case 3:
+                data = addData();
+                option = askOrderedData();
+                mergeSort(data, option);
+                break;
             default:
-                System.out.println("Pilih 1 atau 2 saja!");
+                menu();
+                break;
 
         }
-
-        isRepeat = askRepeat();
-        if (isRepeat) {
-            data = addData();
-            option = askOrderedData();
-            mergeSort(data, option);
-        } else {
-            menu();
-        }
+        int optionOrder = askOrderedData();
+        mergeSort(data, optionOrder);
 
     }
 
@@ -511,9 +542,7 @@ public class Main {
     } 
 
     private static void quickSort(int[] data, int option) {
-        System.out.println("\nMemulai proses Quick Sort..");
-        System.out.println("Data sebelum di urutkan: ");
-        print(data);
+        firstPrint(data, option);
 
         /* Main quick sort operation */
         int[] arr = data;
@@ -536,10 +565,18 @@ public class Main {
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
                 break;
+            case 3:
+                data = addData();
+                option = askOrderedData();
+                quickSort(data, option);
+                break;
             default:
-                System.out.println("Pilih 1 atau 2 saja!");
+                menu();
+                break;
 
         }
+        int optionOrder = askOrderedData();
+        quickSort(data, optionOrder);
 
         isRepeat = askRepeat();
         if (isRepeat) {
@@ -588,8 +625,6 @@ public class Main {
                 
                 } 
             }
-            
-        
         } 
   
         // swap arr[i+1] and arr[high] (or pivot) 
@@ -602,9 +637,7 @@ public class Main {
     }
 
     private static void inplaceSort(int[] data, int option) {
-        System.out.println("\nMemulai proses In Place Sort..");
-        System.out.println("Data sebelum di urutkan: ");
-        print(data);
+        firstPrint(data, option);
 
         /* Main In Place sort operation */
         int[] arr = data;
@@ -627,10 +660,18 @@ public class Main {
                 System.out.println("Data setelah diurutkan:");
                 print(arr);
                 break;
+            case 3:
+                data = addData();
+                option = askOrderedData();
+                inplaceSort(data, option);
+                break;
             default:
-                System.out.println("Pilih 1 atau 2 saja!");
+                menu();
+                break;
 
         }
+        int optionOrder = askOrderedData();
+        inplaceSort(data, optionOrder);
 
         isRepeat = askRepeat();
         if (isRepeat) {
@@ -696,6 +737,7 @@ public class Main {
                 searching(data, searchNumber);
                 break;
             case 2:
+                Arrays.sort(data);
                 int result = binarySearch(data, 0, data.length-1, searchNumber);
                 if(result != -1) {
                     System.out.println("Data " + searchNumber + " ditemukan pada indeks ke-" + (result+1));
@@ -737,8 +779,10 @@ public class Main {
     }
 
     private static int binarySearch(int arr[], int l, int r, int x) { 
-        if (r >= l) { 
+        if (r >= l) {
+            print(arr);
             int mid = l + (r - l) / 2;
+            System.out.println("mid is: " + mid + ", arr[mid]: " + arr[mid]);
             if (arr[mid] == x) 
                 return mid; 
 
@@ -904,7 +948,7 @@ public class Main {
     }
 
     private static int askOrderedData() {
-        System.out.println("Pilih\n1. Ascending\n2. Descending");
+        System.out.println("Pilih operasi\n1. Ascending\n2. Descending\n3. Pengurutan pada array lain\n4. Kembali ke menu utama");
         int askDesc = s.nextInt();
         return  askDesc;
     }
