@@ -2,9 +2,7 @@ package tugas_multiple;
 
 import com.sun.deploy.util.ArrayUtil;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Hashtable;
+import java.util.*;
 
 public class Main {
 
@@ -70,7 +68,7 @@ public class Main {
                     break;
                 default:
                     flag = false;
-                    System.out.println("Program Berakhir. Program ini dibuat oleh\nM Nurilman Baehaqi dan Dwiki\nTerimakasih telah menggunakan program ini");
+                    System.out.println("Program Berakhir. Program ini dibuat oleh\nM Nurilman Baehaqi dan Ridwan\nTerimakasih telah menggunakan program ini");
                     System.exit(0);
                     break;
             }
@@ -351,13 +349,16 @@ public class Main {
     }
 
     private static void startShellSort(int[]arr, boolean isAsc) {
-        int n = arr.length; //13 == 4
-        int limit = n/5;
+        int n = arr.length; //13 == 4 n<=4, limit 0; n<=13, limit 1;
+        int limit = n/3;
         // Start with a big gap, then reduce the gap 
         //for (int gap = n/2; gap > 0; gap /= 2
-        int gap = 1;
-        while(gap <= limit){
-            gap = 3*gap + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
+        int gap = 0;
+//        while(gap <= n){
+//            gap = 3*gap + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
+//        }
+        for (int i = 0; i < n ; i = 3*i + 1) {
+            gap = i;
         }
 
         while (gap > 0)
@@ -810,38 +811,85 @@ public class Main {
 
 
     private static void hashTable() {
+        System.out.println("Pilih metode mana yang akan digunakan jika terjadi collision\n" +
+                "1. Pengalamatan terbuka (open addressing)\n" +
+                "2. Pembentukan rantai (chaining)\n" +
+                "3. Pengalamatan buket");
+        int optionIfCollision = s.nextInt();
         System.out.println("Berapa jumlah data yang akan dimasukkan dalam hash table?");
         int n = s.nextInt();
-        Hashtable<Integer, Integer> hashtable = new Hashtable<>();
-        for(int i = 0; i<n; i++) {
-            System.out.println("Masukkan data ke: " + (i+1));
-            int NIP = s.nextInt();
-            int alamat = NIP % n;
-            while(hashtable.containsKey(alamat)) {
-                System.out.println("Terjadi pengalamatan terbuka. Alamat " + alamat + " sudah terisi");
+        Hashtable<Integer, Object> hashtable = new Hashtable<>();
+        switch (optionIfCollision) {
+            case 1:
+                for(int i = 0; i<n; i++) {
+                    System.out.println("Masukkan data ke: " + (i+1));
+                    int NIP = s.nextInt();
+                    int alamat = NIP % n;
+                    while(hashtable.containsKey(alamat)) {
+                        System.out.println("Terjadi collision dan diatasi dengan pengalamatan terbuka.\nAlamat " + alamat + " sudah terisi");
 
-                if(alamat == n-1) {
-                    alamat = 0;
-                } else {
-                    alamat++;
+                        if(alamat == n-1) {
+                            alamat = 0;
+                        } else {
+                            alamat++;
+                        }
+
+                    }
+                    hashtable.put(alamat, NIP);
+                    System.out.println("Data " + NIP + " sukses dimasukkan ke hashtable dengan alamat " + alamat);
+
                 }
-                
-            }
-            hashtable.put(alamat, NIP);
-            System.out.println("Data " + NIP + " sukses dimasukkan ke hashtable dengan alamat " + alamat);
-            
-        }
-        menuHashtable(hashtable);
-        boolean isRepeat = askRepeat();
-        if (isRepeat) {
-            hashTable();
-        } else {
-            menu();
+                break;
+            case 2:
+                LinkedList<Integer>  nipLinkedList = new LinkedList<>();
+                for(int i = 0; i<n; i++) {
+                    System.out.println("Masukkan data ke: " + (i+1));
+                    int NIP = s.nextInt();
+                    int alamat = NIP % n;
+                    if(hashtable.containsKey(alamat)) {
+                        System.out.println("Terjadi collision dan diatasi dengan pembentukan rantai.");
+                        if (nipLinkedList.isEmpty()) {
+                            int currentValue = Integer.parseInt(hashtable.get(alamat).toString());
+                            nipLinkedList.add(currentValue);
+                        }
+                        nipLinkedList.add(NIP);
+                        hashtable.put(alamat, nipLinkedList);
+                    } else {
+                        hashtable.put(alamat, NIP);
+                    }
+                    System.out.println("Data " + NIP + " sukses dimasukkan ke hashtable dengan alamat " + alamat);
+                }
+                break;
+            case 3:
+                ArrayList<Integer> nipArrayList = new ArrayList<>();
+                for(int i = 0; i<n; i++) {
+                    System.out.println("Masukkan data ke: " + (i+1));
+                    int NIP = s.nextInt();
+                    int alamat = NIP % n;
+                    if(hashtable.containsKey(alamat)) {
+                        System.out.println("Terjadi collision dan diatasi dengan pembentukan buket array.\nAlamat " + alamat + " sudah terisi");
+                        if (nipArrayList.isEmpty()) {
+                            int currentValue = Integer.parseInt(hashtable.get(alamat).toString());
+                            nipArrayList.add(currentValue);
+                        }
+                        nipArrayList.add(NIP);
+                        hashtable.put(alamat, nipArrayList);
+                    } else {
+                        hashtable.put(alamat, NIP);
+                    }
+                    System.out.println("Data " + NIP + " sukses dimasukkan ke hashtable dengan alamat " + alamat);
+                }
+                break;
+            default:
+                System.out.println("Pilihan tidak ditemukan. Mohon untuk memasukkan pilihan 1,2 atau 3 saja.");
+                hashTable();
+                break;
         }
 
+        menuHashtable(hashtable);
     }
 
-    private static void menuHashtable(Hashtable<Integer, Integer> hashtable) {
+    private static void menuHashtable(Hashtable<Integer, Object> hashtable) {
         System.out.println("Petunjuk:\n1. Tampilkan semua data\n2. Cari data\n3. Hapus data\n4. Kembali ke menu");
         int optionInHash = s.nextInt();
         switch(optionInHash) {
@@ -855,10 +903,17 @@ public class Main {
             case 2:
                 System.out.println("Masukkan NIP yang akan dicari: ");
                 int NIP = s.nextInt();
+                //open addressing
                 if(hashtable.containsValue(NIP)) {
                     System.out.println("Data " + NIP + " ditemukan" );
                 } else {
-                    System.out.println("Data tidak ditemukan");
+                    //linkedlist
+                    int alamat = (NIP % hashtable.size()) + 1;
+                    if(hashtable.containsKey(alamat)) {
+                        System.out.println("Data " + NIP + " ditemukan");
+                    } else {
+                        System.out.println("Data tidak ditemukan.");
+                    }
                 }
                 menuHashtable(hashtable);
                 break;
@@ -872,7 +927,6 @@ public class Main {
                     System.out.println("Gagal menghapus data karena data tidak ditemukan");
                 }
                 menuHashtable(hashtable);
-                
                 break;
             
             default:
@@ -922,9 +976,10 @@ public class Main {
     }
 
     private static void print(int[] data) {
-        for (int i=0; i<data.length; i++) {
-            System.out.print(data[i] + ", ");
-        }
+//        for (int i=0; i<data.length; i++) {
+//            System.out.print(data[i] + ", ");
+//        }
+        System.out.println(Arrays.toString(data));
         System.out.println();
     }
 }
