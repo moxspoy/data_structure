@@ -201,7 +201,6 @@ public class Main {
                         }
                     }
                     System.out.println("Nilai maksimum: " + arr[max]);
-                    // When the maximum number of default position and the maximum number is not practical, location of the exchange and the maximum number of actual
                     if (out != max) {
                         System.out.println("swap " + arr[max] + " dengan " + arr[out]);
                         new_temp = arr[out];
@@ -248,9 +247,7 @@ public class Main {
                 {
                     int key = data[i];
                     int j = i-1;
-                    /* Move elements of arr[0..i-1], that are
-                    greater than key, to one position ahead
-                    of their current position */
+
                     System.out.println("kunci: " + key);
                     while (j>=0 && data[j] > key)
                     {
@@ -267,18 +264,11 @@ public class Main {
             case 2:
                 //descending
                 for (int j = 1; j < data.length; j++) {
-                    // Get the key (The value that needs to be compared with existing
-                    // values.
+
                     int key = data[j];
                     System.out.println("kunci: " + key);
-                    // Get the array index for comparison, we need to compare with all
-                    // other elements in the array with
-                    // key
                     int i = j - 1;
-                    // While i > 0 and when key is less than the value in the array
-                    // shift the value and insert
-                    // the value appropriately.
-                    //System.out.println(j);
+
                     while (i >= 0 && data[i] < key) {
                         data[i + 1] = data[i];
                         i = i - 1;
@@ -350,13 +340,7 @@ public class Main {
 
     private static void startShellSort(int[]arr, boolean isAsc) {
         int n = arr.length; //13 == 4 n<=4, limit 0; n<=13, limit 1;
-        int limit = n/3;
-        // Start with a big gap, then reduce the gap 
-        //for (int gap = n/2; gap > 0; gap /= 2
         int gap = 0;
-//        while(gap <= n){
-//            gap = 3*gap + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
-//        }
         for (int i = 0; i < n ; i = 3*i + 1) {
             gap = i;
         }
@@ -364,20 +348,9 @@ public class Main {
         while (gap > 0)
         {
             System.out.println("\nGap yang dipilih: " + gap);
-            // Do a gapped insertion sort for this gap size.
-            // The first gap elements a[0..gap-1] are already
-            // in gapped order keep adding one more element
-            // until the entire array is gap sorted
+
             for (int i = gap; i < n; i++) {
-
-
-                // add a[i] to the elements that have been gap
-                // sorted save a[i] in temp and make a hole at
-                // position i
                 int temp = arr[i];
-
-                // shift earlier gap-sorted elements up until
-                // the correct location for a[i] is found >=
                 int j;
 
                 if(isAsc) {
@@ -395,9 +368,6 @@ public class Main {
                         arr[j] = arr[j - gap];
                     }
                 }
-
-                // put temp (the original a[i]) in its correct
-                // location
                 arr[j] = temp;
                 print(arr);
             }
@@ -447,9 +417,6 @@ public class Main {
 
     }
 
-    // Merges two subarrays of arr[]. 
-    // First subarray is arr[l..m] 
-    // Second subarray is arr[m+1..r] 
     private static void merge(int arr[], boolean isAsc, int l, int m, int r) { 
         // Find sizes of two subarrays to be merged 
         int n1 = m - l + 1; 
@@ -528,20 +495,16 @@ public class Main {
         System.out.println("===================");
     } 
   
-    // Main function that sorts arr[l..r] using 
-    // merge() 
+
     private static void msort(int arr[], boolean isAsc, int l, int r) { 
         if (l < r) 
-        { 
-            // Find the middle point 
+        {
             int m = (l+r)/2; 
-  
-            // Sort first and second halves 
+
             msort(arr, isAsc, l, m);
             
             msort(arr, isAsc, m+1, r); 
-            
-            // Merge the sorted halves 
+
             merge(arr, isAsc, l, m, r);
          
         } 
@@ -591,13 +554,8 @@ public class Main {
 
     private static void qsort(int arr[], boolean isAsc, int low, int high) { 
         if (low < high) 
-        { 
-            /* pi is partitioning index, arr[pi] is  
-              now at right place */
-            int pi = partition(arr, isAsc, low, high); 
-  
-            // Recursively sort elements before 
-            // partition and after partition 
+        {
+            int pi = partition(arr, isAsc, low, high);
             qsort(arr, isAsc, low, pi-1); 
             qsort(arr, isAsc, pi+1, high); 
         } 
@@ -608,17 +566,12 @@ public class Main {
         System.out.println("pivot is: " + pivot);
         int i = (low-1); // index of smaller element 
         for (int j=low; j<high; j++) 
-        { 
-            // If current element is smaller than or 
-            // equal to pivot 
+        {
             if(isAsc) {
                 //asc
                 if (arr[j] <= pivot)
                 { 
-                    i++; 
-      
-                    // swap arr[i] and arr[j] 
-                    //System.out.println("swap " + arr[j] + " with " + arr[i]);
+                    i++;
                     int temp = arr[i]; 
                     arr[i] = arr[j]; 
                     arr[j] = temp; 
@@ -628,10 +581,7 @@ public class Main {
                 //desc
                 if (arr[j] > pivot) 
                 { 
-                    i++; 
-    
-                    // swap arr[i] and arr[j] 
-                    //System.out.println("swap " + arr[j] + " with " + arr[i]);
+                    i++;
                     int temp = arr[i]; 
                     arr[i] = arr[j]; 
                     arr[j] = temp; 
@@ -707,8 +657,6 @@ public class Main {
             if (data[i] < data[max_idx]) {
                 System.out.println("swap " + data[max_idx] + " dengan " + data[i]);
 
-                // Swap the found max element with the first
-                // element
                 int new_temp = data[max_idx];
                 data[max_idx] = data[i];
                 data[i] = new_temp;
@@ -785,20 +733,14 @@ public class Main {
 
     private static int binarySearch(int arr[], int l, int r, int x) { 
         if (r >= l) { 
-            int mid = l + (r - l) / 2; 
-            // If the element is present at the 
-            // middle itself 
+            int mid = l + (r - l) / 2;
             if (arr[mid] == x) 
                 return mid; 
-  
-            // If element is smaller than mid, then 
-            // it can only be present in left subarray 
+
             if (arr[mid] > x) {
                 System.out.println("Pencarian dilakukan ke kiri");
                 return binarySearch(arr, l, mid - 1, x);
             } else {
-                // Else the element can only be present 
-                // in right subarray 
                 System.out.println("Pencarian dilakukan ke kanan");
                 return binarySearch(arr, mid + 1, r, x); 
             }
