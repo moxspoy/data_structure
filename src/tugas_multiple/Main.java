@@ -1,6 +1,5 @@
-package tugas_multiple;
+//package tugas_multiple;
 
-import com.sun.deploy.util.ArrayUtil;
 
 import java.util.*;
 
@@ -802,19 +801,31 @@ public class Main {
 
 
     private static void hashTable() {
+        
+        System.out.println("Berapa jumlah data yang akan dimasukkan dalam hash table?");
+        int n = s.nextInt();
+        ArrayList<Integer> tempArrayList = new ArrayList<>();
+        for(int i = 0; i<n; i++) {
+            System.out.println("Masukkan data ke: " + (i+1));
+            int x = s.nextInt();
+            tempArrayList.add(x);
+        }        
+        menuIfCollision(tempArrayList);
+        
+    }
+    private static void menuIfCollision(ArrayList<Integer> tempArrayList) {
+        Hashtable<Integer, Object> hashtable = new Hashtable<>();
         System.out.println("Pilih metode mana yang akan digunakan jika terjadi collision\n" +
                 "1. Pengalamatan terbuka (open addressing)\n" +
                 "2. Pembentukan rantai (chaining)\n" +
                 "3. Pengalamatan buket");
         int optionIfCollision = s.nextInt();
-        System.out.println("Berapa jumlah data yang akan dimasukkan dalam hash table?");
-        int n = s.nextInt();
-        Hashtable<Integer, Object> hashtable = new Hashtable<>();
+        int n = tempArrayList.size();
         switch (optionIfCollision) {
             case 1:
-                for(int i = 0; i<n; i++) {
+                for(int i = 0; i<tempArrayList.size(); i++) {
                     System.out.println("Masukkan data ke: " + (i+1));
-                    int NIP = s.nextInt();
+                    int NIP = tempArrayList.get(i);
                     int alamat = NIP % n;
                     while(hashtable.containsKey(alamat)) {
                         System.out.println("Terjadi collision dan diatasi dengan pengalamatan terbuka.\nAlamat " + alamat + " sudah terisi");
@@ -833,9 +844,9 @@ public class Main {
                 break;
             case 2:
                 LinkedList<Integer>  nipLinkedList = new LinkedList<>();
-                for(int i = 0; i<n; i++) {
+                for(int i = 0; i<tempArrayList.size(); i++) {
                     System.out.println("Masukkan data ke: " + (i+1));
-                    int NIP = s.nextInt();
+                    int NIP = tempArrayList.get(i);
                     int alamat = NIP % n;
                     if(hashtable.containsKey(alamat)) {
                         System.out.println("Terjadi collision dan diatasi dengan pembentukan rantai.");
@@ -853,9 +864,9 @@ public class Main {
                 break;
             case 3:
                 ArrayList<Integer> nipArrayList = new ArrayList<>();
-                for(int i = 0; i<n; i++) {
+                for(int i = 0; i<tempArrayList.size(); i++) {
                     System.out.println("Masukkan data ke: " + (i+1));
-                    int NIP = s.nextInt();
+                    int NIP = tempArrayList.get(i);
                     int alamat = NIP % n;
                     if(hashtable.containsKey(alamat)) {
                         System.out.println("Terjadi collision dan diatasi dengan pembentukan buket array.\nAlamat " + alamat + " sudah terisi");
@@ -876,12 +887,11 @@ public class Main {
                 hashTable();
                 break;
         }
-
-        menuHashtable(hashtable);
+        menuHashtable(hashtable, tempArrayList);
     }
 
-    private static void menuHashtable(Hashtable<Integer, Object> hashtable) {
-        System.out.println("Petunjuk:\n1. Tampilkan semua data\n2. Cari data\n3. Hapus data\n4. Kembali ke menu");
+    private static void menuHashtable(Hashtable<Integer, Object> hashtable, ArrayList<Integer> tempArrayList) {
+        System.out.println("Petunjuk:\n1. Tampilkan semua data\n2. Cari data\n3. Hapus data\n4. Pilihan Collision\n5. Kembali ke menu");
         int optionInHash = s.nextInt();
         switch(optionInHash) {
             case 1:
@@ -889,7 +899,7 @@ public class Main {
                 for (int key : hashtable.keySet()) {
                     System.out.println("Alamat: " + key + ", NIP: " + hashtable.get(key));
                 }
-                menuHashtable(hashtable);
+                menuHashtable(hashtable, tempArrayList);
                 break;
             case 2:
                 System.out.println("Masukkan NIP yang akan dicari: ");
@@ -906,7 +916,7 @@ public class Main {
                         System.out.println("Data tidak ditemukan.");
                     }
                 }
-                menuHashtable(hashtable);
+                menuHashtable(hashtable, tempArrayList);
                 break;
             case 3:
                 System.out.println("Masukkan alamat data yang akan dihapus: ");
@@ -917,9 +927,11 @@ public class Main {
                 } else {
                     System.out.println("Gagal menghapus data karena data tidak ditemukan");
                 }
-                menuHashtable(hashtable);
+                menuHashtable(hashtable, tempArrayList);
                 break;
-            
+            case 4:
+                menuIfCollision(tempArrayList);
+                break;
             default:
                 menu();
                 break;
@@ -973,11 +985,4 @@ public class Main {
         System.out.println(Arrays.toString(data));
         System.out.println();
     }
-
-    /* TODO List
-    1. Langkah quick sort ada yg blm di tampilkan
-    2. Shell sort yg masalah sub array
-    3. Di hashtable, data dulu diinput nanti baru muncul pilihan pengalamatan
-     */
 }
- 
